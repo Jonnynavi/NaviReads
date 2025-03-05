@@ -3,13 +3,14 @@ import axios from "axios";
 
 const BookContext = createContext();
 
-const url = "https://www.googleapis.com/books/v1/volumes?";
+const url = "https://www.googleapis.com/books/v1/volumes";
 
 function Provider({children}){
     const [books, setBooks] = useState([]);
+    const [currentBook, setCurrentBook] = useState(null);
     
     const fetchBooks = async (keyWord) => {
-        const response = await axios.get(url + `q=${keyWord}&maxResults=14&startIndex=0`);
+        const response = await axios.get(url + `?q=${keyWord}&maxResults=14&startIndex=0`);
         setBooks(response.data.items);
     }
 
@@ -17,10 +18,17 @@ function Provider({children}){
         fetchBooks("sinister");
     }, []);
 
+    const fetchBook = async (bookId) => {
+        const response = await axios.get(`${url}/${bookId}`);
+        setCurrentBook(response.data);
+    }
+
 
     const valueToShare = {
         books,
-        fetchBooks
+        fetchBooks,
+        currentBook,
+        fetchBook
     }
 
     return(

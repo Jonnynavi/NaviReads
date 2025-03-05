@@ -8,8 +8,8 @@ function App(){
 
     return (
         <div>
-            <NavBar />
             <Router>
+                <NavBar />
                 <Routes>
                     <Route path="/" element={<BooksListPage />} />
                     <Route path="/book/:bookId" element={<BookPage />} />

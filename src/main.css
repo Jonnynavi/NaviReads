@@ -3,13 +3,6 @@
 body{
     font-family: poppins;
 }
-.book-list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 0 auto;
-    width: 90%;
-}
 
 .nav-links{
     display: flex;
@@ -41,7 +34,17 @@ body{
     display: flex;
     align-items: center;
 }
-.book-info{
+
+/* Book List */
+
+.book-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 auto;
+    width: 90%;
+}
+.book-list-info{
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -50,18 +53,81 @@ body{
     margin: 0 6px;
 }
 
-.book-info img{
+.book-list-info img{
     height: 200px;
 }
 
-.book-info h2{
+.book-list-info h2{
     font-size: 0.9rem;
     margin: 0;
     margin-top: 10px;
     text-align: center;
 }
 
-.book-info h3{
+.book-list-info h3{
     font-weight: 400;
     font-size: 15px;
+}
+
+.book-list-info a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Book Page */
+
+.book-page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.book-page-cover {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.book-page-cover img {
+    width: 90%;
+}
+
+.book-page-cover .rating{
+    font-size: 35px;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+
+} 
+.book-page-cover p{
+    margin-top: 0;
+}
+
+.book-page-info {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.book-page-info h2 {
+    margin-top: 0;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+.book-page-info h1{
+    margin-bottom: 0;
+}
+
+.book-page-info .rating{
+    padding-left: 0;
+    font-size: 32px;
+    margin: 0;
+    margin-right: 10px;
+}
+.book-page-avarage-rating {
+    display: flex;
+    align-items: center;
 }
