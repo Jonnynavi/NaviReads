@@ -6,12 +6,13 @@ const BooksListPage = () => {
     const {fetchbooks, books} = useContext(BookContext);
     const renderBooks = () => {
         return books.map((book, index) => {
+            const {volumeInfo} = book;
             return(
                 <div className="book-info" key={book.key}>
-                    <img src={`https://covers.openlibrary.org/a/id/${book.cover_i}-L.jpg`} alt={book.title}/>
-                    <h2>{book.title}</h2>
+                    <img src={`http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api`} alt={volumeInfo.title}/>
+                    <h2>{volumeInfo.title}</h2>
                     <div className="author-rating">
-                        <h3>{book.author_name[0]}</h3>
+                        <h3>{volumeInfo.authors[0]}</h3>
                         <Rating />                    
                     </div>
                 </div>

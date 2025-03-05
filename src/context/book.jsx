@@ -3,14 +3,14 @@ import axios from "axios";
 
 const BookContext = createContext();
 
-const url = "https://openlibrary.org/search.json?q=";
+const url = "https://www.googleapis.com/books/v1/volumes?";
 
 function Provider({children}){
     const [books, setBooks] = useState([]);
     
     const fetchBooks = async (keyWord) => {
-        const response = await axios.get(url + `${keyWord}&limit=12&language=eng`);
-        setBooks(response.data.docs);
+        const response = await axios.get(url + `q=${keyWord}&maxResults=14&startIndex=0`);
+        setBooks(response.data.items);
     }
 
     useEffect(() => {

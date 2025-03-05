@@ -11,7 +11,7 @@ function NavBar(){
     return(
         <div>
             <div className="nav-bar">
-                <div className="logo"><img src='../../public/logo.jpg' /></div>
+                <div className="logo"><img src='/logo.jpg' /></div>
                 <ul className="nav-links">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">My Reviews</a></li>
