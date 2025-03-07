@@ -15,7 +15,7 @@ const BooksListPage = () => {
                         <h2>{volumeInfo.title}</h2>
                     </Link>
                     <div className="author-rating">
-                        <h3>{volumeInfo.authors[0]}</h3>
+                        <h3>{volumeInfo.authors?.[0] || ""}</h3>
                         <Rating />                    
                     </div>
                 </div>

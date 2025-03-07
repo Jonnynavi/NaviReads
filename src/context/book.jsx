@@ -10,7 +10,7 @@ function Provider({children}){
     const [currentBook, setCurrentBook] = useState(null);
     
     const fetchBooks = async (keyWord) => {
-        const response = await axios.get(url + `?q=${keyWord}&maxResults=14&startIndex=0`);
+        const response = await axios.get(url + `?q=${keyWord}&maxResults=24&startIndex=0`);
         setBooks(response.data.items);
     }
 

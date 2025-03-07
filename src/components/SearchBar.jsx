@@ -4,18 +4,15 @@ function SearchBar({onSearch}) {
 
     const [search, setSearch] = useState("");
 
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    }
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log(search);
         onSearch(search);
+        setSearch("");
     }
     
     return (
         <form onSubmit={handleSearch}>
-            <input onChange={handleChange} type="text" placeholder="Search..." value={search}/>
+            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search..." value={search}/>
             <button >Search</button>
         </form>
     )
