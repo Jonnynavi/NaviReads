@@ -103,7 +103,7 @@ body{
     height: 900px;
 }
 .book-page-cover img {
-    width: 90%;
+    width: 500px;
 }
 
 .book-page-cover .rating{
@@ -155,4 +155,20 @@ form.login-form {
     flex-direction: column;
     width: 400px;
     align-self: center;
+}
+
+.sign-in-tap{
+    display: flex;
+}
+
+.sign-in-tap div{
+    margin: 0 10px;
+}
+
+.active-stars {
+    transition: transform 0.3s ease; /* Smooth scaling on hover */
+  }
+  
+.active-stars:hover {
+    transform: scale(1.2); /* Scale up the star on hover */
 }

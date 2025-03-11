@@ -1,17 +1,25 @@
 import { useState } from "react";
 import { db } from "../../config/firebase";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, Timestamp, where } from 'firebase/firestore' ;
+import useUserData from "./useUserData";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, Timestamp, updateDoc, where } from 'firebase/firestore' ;
 
-const useBookData = (bookID) =>{
+const useBookData = () =>{
     const [bookReviews, setBookReviews] = useState([]);
-    
+    const { fetchUsername } = useUserData();
 
     const fetchReviews = async (bookID) => {
         try{
             const q = query(collection(db, "reviews"), where("bookID", "==", bookID));
             const querySnapshot = await getDocs(q);
-            const review = querySnapshot.docs.map(doc => doc.data());
-            setBookReviews(review);
+            const reviews = querySnapshot.docs.map(doc => doc.data());
+            const reviewWithUsernames = await Promise.all(
+                reviews.map(async (review) => {
+                    const username = await fetchUsername(review.userID);
+                    return { ...review, username};
+                })
+            )
+            setBookReviews(reviewWithUsernames);
+            console.log(reviewWithUsernames);
         } catch (e){
             console.error("Error fetching reviews", e.message);
         }
@@ -65,7 +73,20 @@ const useBookData = (bookID) =>{
         }
     }
 
-    return {bookReviews, fetchReviews, addReview, deleteReviewByID, deleteReviewByUserID};
+    const updateReview = async (reviewID, rating, review) => {
+        try{
+            const reviewRef = doc(db, "reviews", reviewID);
+            await updateDoc(reviewRef, {
+                rating,
+                review,
+            });
+            console.log("user Updated successfully!");
+        } catch (error){
+            console.error("Error updating user:", error.message);
+        }
+    };
+
+    return {bookReviews, fetchReviews, addReview, deleteReviewByID, deleteReviewByUserID, updateReview};
 
 }
 
