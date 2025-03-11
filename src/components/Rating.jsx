@@ -1,15 +1,12 @@
-import { BsStar, BsStarFill, BsStarHalf  } from "react-icons/bs";
+import { BsStar, BsStarFill  } from "react-icons/bs";
 import { useState } from "react";
 
 
 
 function Rating({rating = 0, active, handleRating}){
-    const [starRating, setStarRating] = useState(rating);
     const [hoverRating, setHoverRating] = useState(0);
-
     const renderStars = () => {
-        
-        const fullStars = Math.floor(hoverRating||starRating);
+        const fullStars = Math.floor(hoverRating||rating);
         const emptyStars = 5 - fullStars;
 
         const starsArray = [
@@ -18,7 +15,6 @@ function Rating({rating = 0, active, handleRating}){
         ]
 
         const handleClick = (index) => {
-            setStarRating(index + 1);
             handleRating(index + 1);
         }
 

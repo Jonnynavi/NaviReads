@@ -12,7 +12,7 @@ function BookPage(){
     const {fetchBook, currentBook} = useContext(BookContext);
     const {bookId} = useParams();
     const [loading, setLoading] = useState(true);
-    const {fetchReviews, bookReviews, addReview, updateReview} = useBookData(bookId);
+    const {fetchReviews, bookReviews, addReview, updateReviewByID} = useBookData(bookId);
     const user = useAuth();
 
     useEffect(() => {
@@ -33,7 +33,7 @@ function BookPage(){
             <BookCover bookID={bookId} />
             <div className="book-page-info">
                 <BookInfo {...currentBook.volumeInfo} />
-                <ReviewSection user={user} bookReviews={bookReviews} addReview={addReview} bookId={bookId} />
+                <ReviewSection updateReview={updateReviewByID} user={user} bookReviews={bookReviews} addReview={addReview} bookId={bookId} />
             </div>
         </div>
     );

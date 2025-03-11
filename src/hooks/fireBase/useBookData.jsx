@@ -3,7 +3,7 @@ import { db } from "../../config/firebase";
 import useUserData from "./useUserData";
 import { addDoc, collection, deleteDoc, doc, getDocs, query, Timestamp, updateDoc, where } from 'firebase/firestore' ;
 
-const useBookData = () =>{
+const useBookData = (bookId) =>{
     const [bookReviews, setBookReviews] = useState([]);
     const { fetchUsername } = useUserData();
 
@@ -11,15 +11,20 @@ const useBookData = () =>{
         try{
             const q = query(collection(db, "reviews"), where("bookID", "==", bookID));
             const querySnapshot = await getDocs(q);
-            const reviews = querySnapshot.docs.map(doc => doc.data());
+            const reviews = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
             const reviewWithUsernames = await Promise.all(
                 reviews.map(async (review) => {
                     const username = await fetchUsername(review.userID);
-                    return { ...review, username};
+                    return { 
+                        ...review, 
+                        username,
+                    };
                 })
             )
             setBookReviews(reviewWithUsernames);
-            console.log(reviewWithUsernames);
         } catch (e){
             console.error("Error fetching reviews", e.message);
         }
@@ -73,20 +78,25 @@ const useBookData = () =>{
         }
     }
 
-    const updateReview = async (reviewID, rating, review) => {
+    const updateReviewByID = async (reviewID, rating, review) => {
         try{
             const reviewRef = doc(db, "reviews", reviewID);
             await updateDoc(reviewRef, {
                 rating,
                 review,
             });
+            fetchReviews(bookId);
             console.log("user Updated successfully!");
         } catch (error){
             console.error("Error updating user:", error.message);
         }
     };
 
-    return {bookReviews, fetchReviews, addReview, deleteReviewByID, deleteReviewByUserID, updateReview};
+    const getAvgRating = (bookId) => {
+        
+    }
+
+    return {bookReviews, fetchReviews, addReview, deleteReviewByID, deleteReviewByUserID, updateReviewByID};
 
 }
 

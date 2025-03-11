@@ -4,7 +4,7 @@ import Rating from "../components/rating";
 import { Link } from "react-router";
 
 const BooksListPage = () => {
-    const {fetchbooks, books} = useContext(BookContext);
+    const {books} = useContext(BookContext);
     const renderBooks = () => {
         return books.map((book, index) => {
             const {volumeInfo} = book;
