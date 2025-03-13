@@ -3,18 +3,19 @@ import ReviewForm from "./ReviewForm";
 import Review from "./Review";
 
 
-function ReviewSection({user, bookReviews, addReview, bookId, updateReview}){
+function ReviewSection({user, bookReviews, addReview, bookId, updateReview, fetchNewRating}){
     const [showReviewForm, setShowReviewForm] = useState(false);
 
     const handleSubmitReview = (rating, review) => {
         addReview(user.uid, bookId, rating, review);
+        fetchNewRating();
         setShowReviewForm(false);
     }
 
     const renderReviews = () => {
         return bookReviews.map((review, index) => {
             return(
-                <Review updateReview={updateReview} review={review} user={user} key={index} />       
+                <Review fetchNewRating={fetchNewRating} updateReview={updateReview} review={review} user={user} key={index} />       
             )
         });
     };

@@ -5,6 +5,8 @@ import { addDoc, collection, deleteDoc, doc, getDocs, query, Timestamp, updateDo
 
 const useBookData = (bookId) =>{
     const [bookReviews, setBookReviews] = useState([]);
+    const [avgRating, setAvgRating] =  useState(0);
+
     const { fetchUsername } = useUserData();
 
     const fetchReviews = async (bookID) => {
@@ -87,16 +89,26 @@ const useBookData = (bookId) =>{
             });
             fetchReviews(bookId);
             console.log("user Updated successfully!");
-        } catch (error){
-            console.error("Error updating user:", error.message);
+        } catch (e){
+            console.error("Error updating user:", e.message);
         }
     };
 
-    const getAvgRating = (bookId) => {
-        
+    const getAvgRating = async (bookId) => {
+        try{
+            const q = query(collection(db, "reviews"), where("bookID", "==", bookId));
+            const querySnapshot = await getDocs(q);
+            const rating = querySnapshot.docs.map(doc => doc.data().rating);
+            let sum = 0;
+            rating.forEach(number => sum += number);
+            const avg = Math.round(sum / rating.length || 0); 
+            return avg;
+        } catch (e) {
+            console.error("Error updating user:", e.message)
+        }
     }
 
-    return {bookReviews, fetchReviews, addReview, deleteReviewByID, deleteReviewByUserID, updateReviewByID};
+    return {bookReviews, fetchReviews, addReview, deleteReviewByID, deleteReviewByUserID, updateReviewByID, getAvgRating};
 
 }
 

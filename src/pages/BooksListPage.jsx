@@ -1,10 +1,12 @@
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import BookContext from "../context/book";
 import Rating from "../components/rating";
 import { Link } from "react-router";
+import useBookData from "../hooks/fireBase/useBookData";
 
 const BooksListPage = () => {
     const {books} = useContext(BookContext);
+
     const renderBooks = () => {
         return books.map((book, index) => {
             const {volumeInfo} = book;
@@ -16,7 +18,7 @@ const BooksListPage = () => {
                     </Link>
                     <div className="author-rating">
                         <h3>{volumeInfo.authors?.[0] || ""}</h3>
-                        <Rating />                    
+                        <Rating rating={book.avgRating}/>                  
                     </div>
                 </div>
             )

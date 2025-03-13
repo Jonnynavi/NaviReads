@@ -15,6 +15,10 @@ function BookPage(){
     const {fetchReviews, bookReviews, addReview, updateReviewByID} = useBookData(bookId);
     const user = useAuth();
 
+    const fetchNewRating = async() => {
+        await fetchBook(bookId);
+    }
+
     useEffect(() => {
         const fetchData = async() => {
             await fetchBook(bookId);
@@ -32,8 +36,8 @@ function BookPage(){
         <div className="book-page">
             <BookCover bookID={bookId} />
             <div className="book-page-info">
-                <BookInfo {...currentBook.volumeInfo} />
-                <ReviewSection updateReview={updateReviewByID} user={user} bookReviews={bookReviews} addReview={addReview} bookId={bookId} />
+                <BookInfo {...currentBook} />
+                <ReviewSection updateReview={updateReviewByID} fetchNewRating={fetchNewRating} user={user} bookReviews={bookReviews} addReview={addReview} bookId={bookId} />
             </div>
         </div>
     );
