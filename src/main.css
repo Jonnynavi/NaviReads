@@ -172,3 +172,29 @@ form.login-form {
 .active-stars:hover {
     transform: scale(1.2); /* Scale up the star on hover */
 }
+
+/* Profile Page */
+.my-favorites {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.my-favorites img {
+    height: 300px;
+    margin: 10px;
+}
+
+.my-Reviews {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.my-Reviews img {
+    height: 300px;
+    margin: 10px;
+}
+ .my-Reviews .review {
+    display: flexs;
+    justify-content: space-around;
+}

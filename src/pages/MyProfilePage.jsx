@@ -3,10 +3,11 @@ import MyReviews from "../components/MyReviews";
 
 function MyProfilePage() {
   return (
-    <div>
+    <div className="profile-page">
       <h1>My Profile</h1>
-      <p>My profile page content</p>
+      <h1>My Favorites</h1>
       <MyFavorites />
+      <h1>My Reviews</h1>
       <MyReviews />
     </div>
   );

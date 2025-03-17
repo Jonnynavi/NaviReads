@@ -9,10 +9,10 @@ function myReviews() {
   const renderMyReviews = () => {
     return myReviews.map((review, index) => {
       return (
-          <div key={index}>
+          <div key={index} className="review">
             <img src={`https://books.google.com/books/content?id=${review.bookID}&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api`} />            
             <p>{review.username}</p>
-            <div>
+            <div >
               <Rating rating={review.rating} />
               <p>{review.review}</p>
             </div>
@@ -22,8 +22,7 @@ function myReviews() {
   }
 
   return (
-    <div>
-      <h1>My Reviews</h1>
+    <div className="my-Reviews">
       {renderMyReviews()}
     </div>
   );
