@@ -5,6 +5,7 @@ import Review from "./Review";
 
 function ReviewSection({user, bookReviews, addReview, bookId, updateReview, fetchNewRating}){
     const [showReviewForm, setShowReviewForm] = useState(false);
+    const [userHasReview, setUserHasReview] = useState(false);
 
     const handleSubmitReview = (rating, review) => {
         addReview(user.uid, bookId, rating, review);
@@ -14,6 +15,9 @@ function ReviewSection({user, bookReviews, addReview, bookId, updateReview, fetc
 
     const renderReviews = () => {
         return bookReviews.map((review, index) => {
+            if(!userHasReview && user?.uid === review.userID){
+                setUserHasReview(true);
+            }
             return(
                 <Review fetchNewRating={fetchNewRating} updateReview={updateReview} review={review} user={user} key={index} />       
             )
@@ -26,7 +30,7 @@ function ReviewSection({user, bookReviews, addReview, bookId, updateReview, fetc
             {renderReviews()}
             <div className="review">
                 <div>
-                    {user && !showReviewForm && <button onClick={() => setShowReviewForm(true)}>Write a review</button>}
+                    {user && !userHasReview && !showReviewForm && <button onClick={() => setShowReviewForm(true)}>Write a review</button>}
                     {showReviewForm && <ReviewForm onEnter={handleSubmitReview}/>}
                 </div>
             </div> 

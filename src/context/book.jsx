@@ -9,10 +9,12 @@ const url = "https://www.googleapis.com/books/v1/volumes";
 function Provider({children}){
     const [books, setBooks] = useState([]);
     const [currentBook, setCurrentBook] = useState(null);
+    const [keyWord, setKeyWord] = useState("");
     const { getAvgRating } = useBookData();
     
-    const fetchBooks = async (keyWord) => {
-        const response = await axios.get(url + `?q=${keyWord}&maxResults=24&startIndex=0`);
+    const fetchBooks = async (search) => {
+        setKeyWord(search);
+        const response = await axios.get(url + `?q=${search}&maxResults=24&startIndex=0`);
         const bookWithRating = await Promise.all(
             response.data.items.map( async (book) => {
                 const avgRating = await getAvgRating(book.id);
@@ -24,7 +26,7 @@ function Provider({children}){
     }
 
     useEffect(() => {
-        fetchBooks("sinister");
+        fetchBooks("faithful and the fallen");
     }, []);
 
     const fetchBook = async (bookId) => {
@@ -39,7 +41,8 @@ function Provider({children}){
         books,
         fetchBooks,
         currentBook,
-        fetchBook
+        fetchBook, 
+        keyWord
     }
 
     return(

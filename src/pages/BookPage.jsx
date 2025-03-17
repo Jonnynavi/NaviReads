@@ -1,15 +1,18 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useEffect, useContext, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import BookContext from "../context/book";
 import useBookData from "../hooks/fireBase/useBookData";
+import useUserData from "../hooks/fireBase/useUserData";
 import BookCover from "../components/BookCover";
 import BookInfo from "../components/BookInfo";
 import ReviewSection from "../components/ReviewSection";
 
 
 function BookPage(){
-    const {fetchBook, currentBook} = useContext(BookContext);
+    const {fetchBook, currentBook, fetchBooks, keyWord} = useContext(BookContext);
+    const navigate = useNavigate();
+    const {addFavorite} = useUserData();
     const {bookId} = useParams();
     const [loading, setLoading] = useState(true);
     const {fetchReviews, bookReviews, addReview, updateReviewByID} = useBookData(bookId);
@@ -17,6 +20,15 @@ function BookPage(){
 
     const fetchNewRating = async() => {
         await fetchBook(bookId);
+        await fetchBooks(keyWord);
+    }
+
+    const addFavoriteBook = () => {
+        if(!user){
+            navigate("/login")
+            return
+        }
+        addFavorite(user.uid, bookId)
     }
 
     useEffect(() => {
@@ -34,7 +46,7 @@ function BookPage(){
 
     return(
         <div className="book-page">
-            <BookCover bookID={bookId} />
+            <BookCover bookID={bookId} addFavoriteBook={addFavoriteBook} user={user} />
             <div className="book-page-info">
                 <BookInfo {...currentBook} />
                 <ReviewSection updateReview={updateReviewByID} fetchNewRating={fetchNewRating} user={user} bookReviews={bookReviews} addReview={addReview} bookId={bookId} />

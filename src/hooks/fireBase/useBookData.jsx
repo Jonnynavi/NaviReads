@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { db } from "../../config/firebase";
 import useUserData from "./useUserData";
+import { useAuth } from "../../context/AuthContext";
 import { addDoc, collection, deleteDoc, doc, getDocs, query, Timestamp, updateDoc, where } from 'firebase/firestore' ;
 
 const useBookData = (bookId) =>{
     const [bookReviews, setBookReviews] = useState([]);
-    const [avgRating, setAvgRating] =  useState(0);
-
     const { fetchUsername } = useUserData();
 
     const fetchReviews = async (bookID) => {

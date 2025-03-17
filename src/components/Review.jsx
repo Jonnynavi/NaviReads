@@ -18,7 +18,7 @@ function Review({review, user, updateReview, fetchNewRating}){
                 <Rating rating={review.rating} />
                 <p>{review.review}</p>
             </div>
-            {review.userID === user.uid && <button onClick={() => setShowEditForm(true)}>Edit Review</button>}
+            {review.userID === user?.uid && <button onClick={() => setShowEditForm(true)}>Edit Review</button>}
         </div>
     );
     
