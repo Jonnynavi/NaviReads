@@ -14,7 +14,7 @@ function Provider({children}){
     
     const fetchBooks = async (search) => {
         setKeyWord(search);
-        const response = await axios.get(url + `?q=${search}&maxResults=24&startIndex=0`);
+        const response = await axios.get(url + `?q=${search}&maxResults=30&startIndex=0`);
         const bookWithRating = await Promise.all(
             response.data.items.map( async (book) => {
                 const avgRating = await getAvgRating(book.id);

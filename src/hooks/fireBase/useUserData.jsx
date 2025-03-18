@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { db } from "../../config/firebase";
 import { getDocs, getDoc, doc, setDoc, collection, deleteDoc, updateDoc, query, Timestamp, where, arrayUnion } from 'firebase/firestore';
+import axios from "axios";
 
 const useUserData = (userId) => {
 
@@ -26,7 +27,12 @@ const useUserData = (userId) => {
         }
         
     }, [userId]);
- 
+
+    const fetchBook = async (bookId) => {
+        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`);
+        return {...response.data.volumeInfo, "id": bookId};
+    }
+
     const fetchUsername = async (userID) => {
         try{
             const userRef = doc(db, "users", userID);
@@ -72,7 +78,12 @@ const useUserData = (userId) => {
         try{
             const userRef = doc(db, "users", userId);
             const userSnap = await getDoc(userRef)
-            
+            // const books = await Promise.all(
+            //     userSnap.data().favorites.map( async (book) => {
+            //       const bookInfo = await fetchBook(book);
+            //       return bookInfo
+            //     })
+            // );
             return userSnap.data().favorites || [];
         } catch (error) {
             console.error("Error fetching favorites", error);

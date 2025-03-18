@@ -11,12 +11,12 @@ import ReviewSection from "../components/ReviewSection";
 
 function BookPage(){
     const {fetchBook, currentBook, fetchBooks, keyWord} = useContext(BookContext);
+    const user = useAuth();
     const navigate = useNavigate();
-    const {addFavorite} = useUserData();
+    const {addFavorite, favorites} = useUserData(user?.uid);
     const {bookId} = useParams();
     const [loading, setLoading] = useState(true);
     const {fetchReviews, bookReviews, addReview, updateReviewByID} = useBookData(bookId);
-    const user = useAuth();
 
     const fetchNewRating = async() => {
         await fetchBook(bookId);
@@ -28,7 +28,8 @@ function BookPage(){
             navigate("/login")
             return
         }
-        addFavorite(user.uid, bookId)
+        addFavorite(user.uid, bookId);
+        fetchBook(bookId);
     }
 
     useEffect(() => {
@@ -46,7 +47,7 @@ function BookPage(){
 
     return(
         <div className="book-page">
-            <BookCover bookID={bookId} addFavoriteBook={addFavoriteBook} user={user} />
+            <BookCover bookID={bookId} addFavoriteBook={addFavoriteBook} user={user} favorites={favorites} />
             <div className="book-page-info">
                 <BookInfo {...currentBook} />
                 <ReviewSection updateReview={updateReviewByID} fetchNewRating={fetchNewRating} user={user} bookReviews={bookReviews} addReview={addReview} bookId={bookId} />

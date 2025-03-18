@@ -23,7 +23,7 @@ body{
     z-index: 10;
     height: 50px;
     background-color: #f8f8f8;
-    padding-top: 10px;
+    padding: 10px;
 }
 
 .logo{
@@ -35,14 +35,20 @@ body{
 .rating{
     list-style: none;
     display: flex;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 10px;
 }
 .author-rating{
     display: flex;
     align-items: center;
+    flex-direction: column-reverse;
 }
 
 /* Book List */
-
+.book-list-page {
+    margin: 10px;
+}
 .book-list{
     display: flex;
     flex-wrap: wrap;
@@ -50,13 +56,13 @@ body{
     margin: 0 auto;
     width: 90%;
 }
-.book-list-info{
+.book-list-info {
     width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    margin: 0 6px;
+    margin: 10px;
 }
 
 .book-list-info img{
@@ -147,9 +153,26 @@ body{
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid;
+    width: 100%;
+    align-items: flex-start;
 }
 
+.review-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form.review-form textarea {
+    height: 200px;
+    width: 90%;
+}
 /* Login page */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 form.login-form {
     display: flex;
     flex-direction: column;
@@ -174,6 +197,9 @@ form.login-form {
 }
 
 /* Profile Page */
+.profile-page {
+    margin: 20px;
+}
 .my-favorites {
     display: flex;
     flex-wrap: wrap;
@@ -188,7 +214,6 @@ form.login-form {
 .my-Reviews {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
 }
 .my-Reviews img {
     height: 300px;
@@ -197,4 +222,11 @@ form.login-form {
  .my-Reviews .review {
     display: flexs;
     justify-content: space-around;
+}
+.review {
+    width: 250px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
 }

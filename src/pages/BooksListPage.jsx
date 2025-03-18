@@ -25,7 +25,7 @@ const BooksListPage = () => {
         });
     }
     return (
-        <div>
+        <div className="book-list-page">
             <h1>Book List</h1>
             <div className="book-list">
                 {renderBooks()}

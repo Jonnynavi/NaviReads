@@ -29,10 +29,8 @@ function ReviewSection({user, bookReviews, addReview, bookId, updateReview, fetc
             <h1>Reviews</h1>
             {renderReviews()}
             <div className="review">
-                <div>
                     {user && !userHasReview && !showReviewForm && <button onClick={() => setShowReviewForm(true)}>Write a review</button>}
                     {showReviewForm && <ReviewForm onEnter={handleSubmitReview}/>}
-                </div>
             </div> 
         </div>
     )

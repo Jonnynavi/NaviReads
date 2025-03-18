@@ -12,15 +12,13 @@ function ReviewForm({onEnter, reviewDesc, oldRating}){
     }
 
     return(   
-        <div>
-            <form onSubmit={handleSubmit}>
+            <form className="review-form" onSubmit={handleSubmit}>
                 <label>Rating</label>
                 <Rating active rating={rating} handleRating={setRating}/>
                 <label>Review</label>
-                <input value={review} onChange={(e) => setReview(e.target.value)} />
+                <textarea value={review} onChange={(e) => setReview(e.target.value)} />
                 <button>Submit Review</button>
             </form>
-        </div>
     )
 }
 
