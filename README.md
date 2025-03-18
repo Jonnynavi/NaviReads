@@ -50,23 +50,25 @@ navi-reads/
 │   ├── App.jsx
 │   ├── main.css
 │   ├── main.jsx
+```
 ## Installation & Setup
 
 ### 1. Clone the Repository
 ```sh
 git clone https://github.com/your-username/navi-reads.git
 cd navi-reads
-2. Install Dependencies
-sh
-Copy code
+```
+### 2. Install Dependencies
+```sh
 npm install
-3. Set Up Firebase
+```
+### 3. Set Up Firebase
 Create a Firebase project in the Firebase Console.
 Enable Authentication (Email/Google Sign-In).
 Set up Firestore Database.
 Configure Firebase in src/config/firebase.js:
-js
-Copy code
+```sh
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -83,16 +85,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-4. Run the App Locally
-sh
-Copy code
+```
+### 4. Run the App Locally
+``` sh
 npm run dev
 Deployment
+```
 You can deploy Navi-Reads using Firebase Hosting:
 
-sh
-Copy code
+```sh
 npm install -g firebase-tools
 firebase login
 firebase init
 firebase deploy
+```
